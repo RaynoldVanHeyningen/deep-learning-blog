@@ -51,7 +51,6 @@ extra_css:
 plugins:
   - blog:
       blog_toc: true
-  - mkdocs-jupyter
   - search
 
 nav:
