@@ -462,3 +462,4 @@ You will know your virtual environment is active when you see its name on the le
 Whenever you want to leave the circle, just type `deactivate` in your command line or terminal.
 
 ## Installing our Deep Learning library
+
