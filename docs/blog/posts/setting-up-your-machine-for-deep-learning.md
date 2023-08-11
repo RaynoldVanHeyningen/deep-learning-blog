@@ -570,6 +570,87 @@ If your GPU might not be supported, you can always use cloud providers like `Goo
 
 Anyway, it's great practise to understand and test your tools. Doing this will make you know your wand and spellbook for when you plan to cast bigger and more complex spells!
 
+## The Magical Book: Jupyter Notebooks 📖
+
+Imagine having access to a book that reacts to you spells immediatly when you enter them, where you can draw diagrams, make notes, and even have conversations with. In the world of deep learning, this magical book is known as a Jupyter Notebook.
+
+### What makes Jupyter Notebooks so special?
+
+1. **Interactive Spells:**
+
+Write a spell (or code) and see it's effects immediatly. This instant feedback makes it perfect for experimentation
+
+2. **Blend of Text and Magic:**
+
+Combine notes, diagrams and code in one place. It's like having a spellbook with annotations!
+
+3. **Shareable:**
+
+Once you have perfected a spell or discovered something new, you can easily share it with other wizards.
+
+### How to get this magical book?
+
+1. When you are in your virtual environment (or magical room), simply write:
+
+```bash
+pip install jupyter
+```
+
+2. To open the book and begin writing your spells, write:
+
+```bash
+jupyter notebook
+```
+
+A portal will open in your browser, which leads you to your Jupyter environment.
+
+## Mastering Your Magical Book 🧙‍♂️📖
+
+### Starting with a new notebook
+
+Let's create a new notebook in our brand new environment:
+
+- Click the `New` button on the top right
+- Choose `Notebook`
+
+Welcome to your first notebook!
+
+### Cells - The Heartbeats of Jupyter
+
+- Each notebook consists of cells. Each cell can contain code or written text (in `Markdown`)
+- By default a cell will be of type `Code`, to test this out select the first cell and type in
+```python
+1 + 1
+```
+- To run a cell, click on it and press `Shift + Enter`. The result will be displayed right under the cell. Try it out and see the result of our very difficult calculation!
+A new cell will be automatically created for you.
+- To change a cell's type, use the dropdown menu at the top. Choose `Code` for Python code or `Markdown` for written text. Try it out now by selecting `Markdown` for the second cell
+
+### Writing and Formatting Text:
+
+- To write titles, use the hashtag (`#`). For example write, `# Title`, this will turn into a big title. `## Subtitle` will give a slightly smaller one, and so on.
+- To make text bold, wrap it in double asterisks like `**this is bold**`.
+- For bullet points, use dashes (`-`) or asterisks (`*`).
+
+[Read more about markdown](https://itsfoss.com/markdown-guide/)
+
+### Saving and Closing Your Notebook:
+
+- To save your work, click on the floppy disk icon on the top left or press `Ctrl + S` (or `Cmd + S` on Mac).
+- When done, click on the `File` menu and choose `Close and Shut Down Notebook` to shutdown the notebook. This ensures the spells (codes) you've been running also stop.
+
+### Tips to have a GREAT Jupyter time:
+
+- Autocomplete is your friend! While writing code, press `Tab` to autocomplete Python functions or variable names.
+- If your notebook ever gets stuck, go to the `Kernel` menu and choose `Restart Kernel...`. This acts like a mgaical reset button, refreshing your environment.
+
+### Venturing Further:
+
+- Jupyter Notebooks have many built-in functionalities, like magic commands (commands starting with `%`). For example, `%time` before a spell (code) will show you how long it takes to run.
+- You can also look at data, plot graphs, and even embed videos. The limits are endless!
+
+Remember, Jupyter Notebooks are more then just a tool. It's your companion in this deep learning journey. The more you work with it, the better you will get!
+
 ## Conclusion 🎉
 
 The journey to becoming a deep learning magician is enchanting but very complex, and today, we have taken a very big step preparing for our journey! Here's what we did today:
