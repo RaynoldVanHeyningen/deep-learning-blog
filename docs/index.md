@@ -1,6 +1,6 @@
 # Homepage
 
-Visit the [blog](/blog/index.md).
+Visit the [blog](blog).
 
 
 :smile:
