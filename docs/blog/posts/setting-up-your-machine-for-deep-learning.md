@@ -1,9 +1,10 @@
 ---
-draft: false 
-date: 2022-01-31 
+draft: false
+authors: [raynold]
+date: 2023-08-12 
 categories:
-  - Hello
-  - World
+  - Deep Learning
+  - Setting up
 links:
   - Getting started with Insiders: insiders/getting-started.md#requirements
   - setup/setting-up-a-blog.md#built-in-blog-plugin
@@ -463,3 +464,134 @@ Whenever you want to leave the circle, just type `deactivate` in your command li
 
 ## Installing our Deep Learning library
 
+While we are getting deeper into the deep learning world, we need to equip ourselves with the right AI tools. Just like a wizard has their favorite wand, in deep learning, we have several libraries we can use. Each have their own unique capabilities and strenghts.
+
+### Let's look into the chamber of libraries
+
+Before we dive in, let's look at the different tools we can use:
+
+- **TensorFlow 🌊:**  
+Created by the wizards from Google, TensorFlow is very versatile and widely used. It gives you many high-level and low-level tools, this way it's usable for everyone, from beginner to the most powerful wizards.
+
+- **PyTorch 🔥:**  
+Coming from Facebook's (or Meta nowadays...) school of sorcery, PyTorch is like a spellbook that changes and adapts while you are casting spells. Being this flexible allows wizards to experiment as much as they please, making it loved by people who love to tinker and innovate in their magic.
+
+- **FastAI 🌪️:**  
+A rising star in this world of deep learning. FastAI is built on top of PyTorch. People celebrate it, because it's super user-friendly and being able to get world-class results with very little code. This library is the perfect example of a "magic spell" - being able to achieve great things with simple incantations.
+
+There are many libraries to choose from, but for our journey, we will be using the great power of **FastAI**! Being able to achieve beautiful results very fast, and then dive deeper and use the power of PyTorch to tinker and innovate when we feel ready, is a power we can't pass up on.
+
+### Installing FastAI: Equipping our Spellbook 📖
+
+Because FastAI is built on top of PyTorch, we will first have to install and setup PyTorch. Just like gathering the base ingredients to create a powerful potion.
+
+1. **Setting up PyTorch 🔥:** 
+
+    While i will show you the current way to install PyTorch, make sure to check out [PyTorch's official installation guide](https://pytorch.org/get-started/locally/), since the world of AI changes fast, and the version we will currently be installing, might be replaced tomorrow.
+
+    On the PyTorch installation guide, we have to choose between several options:
+
+    - **PyTorch Build:**  
+    Do you want to play with the newest features, which can have bugs, or do you want to work with a stable version?  
+    We will choose `Stable`` (which is currently on version 2.0.1)
+
+    - **Your OS:**  
+    Choose the operating system you are using, we will be using `Windows`
+
+    - **Package:**  
+    This is where we choose, *how* we want to install PyTorch.
+    Since we have been using `pip` so far, we will choose `Pip`
+
+    - **Computer Platform:**  
+    Here we choose what hardware we want to use with PyTorch.
+    CUDA gives us the ability to use our GPU, while the CPU option
+    will install PyTorch, with only CPU capabilities. Choosing
+    CUDA is the best of both worlds, we can still use the CPU if
+    we wanted. We will choose the latest supported CUDA version by our GPU, which currently is `CUDA 11.8`
+
+    Having selected our options, the installation guide will show us what command to run to install PyTorch. The command which shows up for us currently is:
+
+    ```bash
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+    ```
+
+    So in our crystal ball (Command Prompt/Terminal) enter this exact command.
+
+    *If you have closed the command prompt after the last steps, make sure to open it again, `cd` into the correct directory and `activate` our magic room as described above*
+
+2. **Installing FastAI 🌪️:**  
+
+    With PyTorch as our foundation, it is now time to summon `FastAI`. In your crystal ball, enter:
+
+    ```bash
+    pip install fastai
+    ```
+
+3. **Verifying our installation 🔍:**  
+
+    To make sure that FastAI and PyTorch are ready to play with, we can run a quick test!
+
+    In your crystal ball enter:
+    ```python
+    python -c "import fastai; print(fastai.__version__)"
+    ```
+
+    If everything went the way we want things to go, our crystal ball will tell you the version number of FastAI. If you see the version number, it is ready to be used for our deep learning quests!
+
+## Testing Your Setup 🧪
+
+Now that we have all our magic tools, let's make sure everything is working by checking if our GPU is setup correctly.
+
+### Running a Simple Deep Learning Spell
+
+1. **Preparing our spell:**
+
+    Remember! Make sure your magic room is activated before we get started!
+
+2. **Casting our GPU checker:**
+
+    Run the following command:
+
+    ```python
+    python -c "from fastai.vision.all import *; print(torch.cuda.is_available())"
+    ```
+
+    This usefull spell asks FastAI and PyTorch to check if they can find and use the GPU. If they can, they should respond with `True`.
+
+### Understanding the output 🔮
+
+If you saw `True`, congratulations! 🎉, your GPU is ready to lend you it's powers!
+
+If you saw `False`, don't worry. It might mean your system is not using GPU acceleration. This can be because of different reasons, maybe the GPU is not supported, or perhaps there is a slight misconfiguration somewhere.
+
+For example i had this issue, because on the PyTorch website it uses `pip3` in the command. However, we have been using `pip` until now. Usually this should be fine, but if you have multiple python installation on your computer, both versions of pip could be pointing to different installations. Running the command using `pip` fixed it for me.
+
+If your GPU might not be supported, you can always use cloud providers like `Google Colab` to borrow the power of the GPUs in the magical clouds.
+
+Anyway, it's great practise to understand and test your tools. Doing this will make you know your wand and spellbook for when you plan to cast bigger and more complex spells!
+
+## Conclusion 🎉
+
+The journey to becoming a deep learning magician is enchanting but very complex, and today, we have taken a very big step preparing for our journey! Here's what we did today:
+
+- **Introduction to this Magical Realm:**
+
+We've look at the importance of GPUs in boosting our spells and looked at using CUDA to harness it's power
+
+- **Setting up our Magical Language:**
+
+With Python as our trusty spellbook, we are ready to cast our spells. We learned about the `pip` wand and created our own magic room, a virtual environment, to keep our spells organized.
+
+- **The chamber of libraries:**
+
+We looked at the rich world of deep learning libraries, looking at the benefits of each. We have chosen FastAI as our companion and we made sure it was equipped with the power of PyTorch.
+
+- **Testing the waters:**
+
+We tested our setup, to make sure all our powers are ready to use for our upcoming adventures.
+
+## A Glimbse Beyond the Horizon 🌅
+
+In our next post, we are going to look deeper into FastAI. We are going to look at deciphering the melodies and rhythms of the world around us by working on a audio sample classifier. Think about this, by the end of our next session, you will be able to play a drum sound to your computer - wether it's a kick or snare - and it will magically tell you what type of sound it is!
+
+So keep your wands ready and spellbooks open. The world of deep learning is right around the corner!
