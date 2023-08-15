@@ -5,9 +5,6 @@ date: 2023-08-12
 categories:
   - Deep Learning
   - Setting up
-links:
-  - Getting started with Insiders: insiders/getting-started.md#requirements
-  - setup/setting-up-a-blog.md#built-in-blog-plugin
 ---
 # Setting Up Your Machine For Deep Learning
 
@@ -21,6 +18,8 @@ Think of it as a magical tool that not only lets computers recognize
 things like pictures of cats and dogs, but also helps them create new
 sounds, melodies, and even whole songs! 🎵🐱🎶
 
+<!-- more -->
+
 Have you ever dreamt of a computer composing its own music, or changing
 your voice to sound like your favorite cartoon character? With deep
 learning, all of this becomes possible! 🎤🎧
@@ -32,8 +31,6 @@ This guide will help us tune our computer to perfection. We’ll get it
 ready step by step, and i promise it will be super fun! 🎹🧙‍♂️
 
 Are you excited to begin?
-
-<!-- more -->
 
 ## Understanding the basics
 
