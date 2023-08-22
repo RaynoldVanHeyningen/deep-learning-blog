@@ -63,7 +63,7 @@ Walking through the world of deep learning, you will soon realize the huge amoun
 
 Every project or spell you want to cast, has it's own requirements. Choosing the right data is the same as choosing the right ingredients for a potion. Making the wrong choice, and you might end up with weird results, or even worse, a spell that hits you o.O!
 
-1. **Relevance:**
+1. **Relevance:**duration_distribution
 
     Make sure that the data fits your problem. If you are trying to understand the song of birds 🐦, analyzing scrolls of dragon lore 🐲 won't be of much help...
 
