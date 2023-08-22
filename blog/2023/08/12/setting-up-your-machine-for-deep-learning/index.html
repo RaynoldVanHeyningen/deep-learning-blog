@@ -1,0 +1,1663 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="../../15/finding-acquiring-data-the-cornerstone-of-magical-models/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.0-b3">
+    
+    
+      
+        <title>Setting Up Your Machine For Deep Learning - Deep Learning with Ray</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.83068744.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setting-up-your-machine-for-deep-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Deep Learning with Ray" class="md-header__button md-logo" aria-label="Deep Learning with Ray" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Deep Learning with Ray
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Setting Up Your Machine For Deep Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Deep Learning with Ray" class="md-nav__button md-logo" aria-label="Deep Learning with Ray" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Deep Learning with Ray
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_1">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/deep-learning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deep Learning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/setting-up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-basics" class="md-nav__link">
+    Understanding the basics
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding the basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu-vs-gpu" class="md-nav__link">
+    🧠 CPU vs GPU
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-do-i-need-a-gpu" class="md-nav__link">
+    Why do i need a GPU
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-your-hardware" class="md-nav__link">
+    Checking Your Hardware
+  </a>
+  
+    <nav class="md-nav" aria-label="Checking Your Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#become-a-computer-detective" class="md-nav__link">
+    🕵️ Become a Computer Detective!
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-i-have-a-deep-learning-friendly-gpu" class="md-nav__link">
+    🖥️ Do I have a deep learning-friendly GPU?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-my-gpu-ready-for-deep-learning" class="md-nav__link">
+    🚀 Is My GPU Ready for Deep Learning?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-if-i-dont-have-a-hero-gpu" class="md-nav__link">
+    💭 What if I Don’t Have a Hero GPU?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-recap" class="md-nav__link">
+    🔍 Quick Recap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-the-necessary-software" class="md-nav__link">
+    Getting the Necessary Software
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting the Necessary Software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuda-the-magical-portal-between-worlds" class="md-nav__link">
+    🧙‍♂️ CUDA: The Magical Portal Between Worlds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-cuda-compatibility-with-your-gpu" class="md-nav__link">
+    👁‍🗨 Checking CUDA compatibility with your GPU
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-cuda" class="md-nav__link">
+    🔮 Installing CUDA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-python" class="md-nav__link">
+    Setting up Python 🐍
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up Python 🐍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-magic-of-virtual-environments" class="md-nav__link">
+    The Magic of Virtual Environments 🌍✨
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-our-magic-language-python-with-pip" class="md-nav__link">
+    Setting up our magic language: Python (with pip)
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up our magic language: Python (with pip)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-hell-is-pip" class="md-nav__link">
+    What the hell is pip 😵‍💫?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-install" class="md-nav__link">
+    How to install
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wizards-crystal-ball" class="md-nav__link">
+    The wizards crystal ball 🔮
+  </a>
+  
+    <nav class="md-nav" aria-label="The wizards crystal ball 🔮">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-command-lineterminal" class="md-nav__link">
+    What is the Command Line/Terminal?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-access-your-crystal-ball" class="md-nav__link">
+    How to access your crystal ball
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-our-python-using-our-crystal-ball" class="md-nav__link">
+    Checking our Python using our Crystal Ball
+  </a>
+  
+    <nav class="md-nav" aria-label="Checking our Python using our Crystal Ball">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checking-our-pip-install" class="md-nav__link">
+    Checking our pip install
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-our-first-virtual-environment" class="md-nav__link">
+    Creating our first Virtual Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-our-deep-learning-library" class="md-nav__link">
+    Installing our Deep Learning library
+  </a>
+  
+    <nav class="md-nav" aria-label="Installing our Deep Learning library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lets-look-into-the-chamber-of-libraries" class="md-nav__link">
+    Let's look into the chamber of libraries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-fastai-equipping-our-spellbook" class="md-nav__link">
+    Installing FastAI: Equipping our Spellbook 📖
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-your-setup" class="md-nav__link">
+    Testing Your Setup 🧪
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Your Setup 🧪">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-a-simple-deep-learning-spell" class="md-nav__link">
+    Running a Simple Deep Learning Spell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-output" class="md-nav__link">
+    Understanding the output 🔮
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-magical-book-jupyter-notebooks" class="md-nav__link">
+    The Magical Book: Jupyter Notebooks 📖
+  </a>
+  
+    <nav class="md-nav" aria-label="The Magical Book: Jupyter Notebooks 📖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-makes-jupyter-notebooks-so-special" class="md-nav__link">
+    What makes Jupyter Notebooks so special?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-get-this-magical-book" class="md-nav__link">
+    How to get this magical book?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mastering-your-magical-book" class="md-nav__link">
+    Mastering Your Magical Book 🧙‍♂️📖
+  </a>
+  
+    <nav class="md-nav" aria-label="Mastering Your Magical Book 🧙‍♂️📖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting-with-a-new-notebook" class="md-nav__link">
+    Starting with a new notebook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cells-the-heartbeats-of-jupyter" class="md-nav__link">
+    Cells - The Heartbeats of Jupyter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#writing-and-formatting-text" class="md-nav__link">
+    Writing and Formatting Text:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saving-and-closing-your-notebook" class="md-nav__link">
+    Saving and Closing Your Notebook:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tips-to-have-a-great-jupyter-time" class="md-nav__link">
+    Tips to have a GREAT Jupyter time:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#venturing-further" class="md-nav__link">
+    Venturing Further:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion 🎉
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-glimbse-beyond-the-horizon" class="md-nav__link">
+    A Glimbse Beyond the Horizon 🌅
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://www.github.com/RaynoldVanHeyningen.png" alt="Raynold van Heyningen">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>Raynold van Heyningen</strong><br>
+                      Deep Learning
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__title">
+                <div class="md-nav__link">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+              </li>
+              <li class="md-nav__item">
+                <div class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                  <time datetime="2023-08-12 00:00:00" class="md-ellipsis">August 12, 2023</time>
+                </div>
+              </li>
+              
+              
+                <li class="md-nav__item">
+                  <div class="md-nav__link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z"/></svg>
+                    <span class="md-ellipsis">
+                      in
+                      
+                        <a href="../../../../category/deep-learning/">Deep Learning</a>, 
+                        <a href="../../../../category/setting-up/">Setting up</a></span>
+                  </div>
+                </li>
+              
+              
+                
+                <li class="md-nav__item">
+                  <div class="md-nav__link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                    <span class="md-ellipsis">
+                      
+                        19 min read
+                      
+                    </span>
+                  </div>
+                </li>
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+<h1 id="setting-up-your-machine-for-deep-learning">Setting Up Your Machine For Deep Learning<a class="headerlink" href="#setting-up-your-machine-for-deep-learning" title="Permanent link">&para;</a></h1>
+<p>Hey there, explorer! 🚀</p>
+<p>Guess what? We are about to start a super fun and exciting adventure
+into the world of deep learning. Now you might be wondering, “What is
+deep learning?”.</p>
+<p>Think of it as a magical tool that not only lets computers recognize
+things like pictures of cats and dogs, but also helps them create new
+sounds, melodies, and even whole songs! 🎵🐱🎶</p>
+<!-- more -->
+
+<p>Have you ever dreamt of a computer composing its own music, or changing
+your voice to sound like your favorite cartoon character? With deep
+learning, all of this becomes possible! 🎤🎧</p>
+<p>But, just like setting up a new instrument before playing it, we need to
+make sure our computer is ready for this new world.</p>
+<p>This guide will help us tune our computer to perfection. We’ll get it
+ready step by step, and i promise it will be super fun! 🎹🧙‍♂️</p>
+<p>Are you excited to begin?</p>
+<h2 id="understanding-the-basics">Understanding the basics<a class="headerlink" href="#understanding-the-basics" title="Permanent link">&para;</a></h2>
+<h3 id="cpu-vs-gpu">🧠 CPU vs GPU<a class="headerlink" href="#cpu-vs-gpu" title="Permanent link">&para;</a></h3>
+<p>The CPU is the brain of the computer, it’s so important, that without
+it, your computer would turn into a simple brick. It’s responsible for
+all the main things a computer does, running windows, your internet
+browser and your favorite DAW. Under the hood all it’s doing is
+calculating numbers.</p>
+<p>Now the GPU (Graphics Card) is responsible for making things look
+pretty. It’s wahat you need to play your favorite games, like Diablo,
+Fifa, Minecraft and all other games you play.</p>
+<h3 id="why-do-i-need-a-gpu">Why do i need a GPU<a class="headerlink" href="#why-do-i-need-a-gpu" title="Permanent link">&para;</a></h3>
+<p>The way the GPU is created, is that it’s super fast at calculating the
+numbers that show you the graphics, that simulate physics etc. And
+because it’s so fast at these tasks. AI experts have found out that
+using your GPU to train your AI application, is alot faster then using
+your CPU.</p>
+<p>Now if you don’t have a good (or supported) graphics card, you can still
+use your CPU, however training your AI will take alot longer.</p>
+<h2 id="checking-your-hardware">Checking Your Hardware<a class="headerlink" href="#checking-your-hardware" title="Permanent link">&para;</a></h2>
+<h3 id="become-a-computer-detective">🕵️ Become a Computer Detective!<a class="headerlink" href="#become-a-computer-detective" title="Permanent link">&para;</a></h3>
+<p>Before getting started with deep learning, we have to become a bit of a
+detective and take a look inside our computer. It’s just like checking
+your backpack before you go camping, you want to make sure you have all
+the essentials!</p>
+<h3 id="do-i-have-a-deep-learning-friendly-gpu">🖥️ Do I have a deep learning-friendly GPU?<a class="headerlink" href="#do-i-have-a-deep-learning-friendly-gpu" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Windows:</strong></p>
+</li>
+<li>
+<p>Click on the search bar at the bottom</p>
+</li>
+<li>
+<p>Type in <code>Device Manager</code> and click on it.</p>
+<ul>
+<li>Look for <code>Display adapters</code> and click on the arrow next to it.
+    If you see names like <code>NVIDIA</code> or <code>AMD</code>, you might have a
+    compatible GPU! 🌟</li>
+</ul>
+</li>
+<li>
+<p><strong>Mac:</strong></p>
+<ul>
+<li>Click on the Apple logo on the top left.</li>
+<li>Select <code>About This Mac</code></li>
+<li>Look under <code>Graphics</code>. If you see <code>AMD</code> or <code>Radean</code>, that’s a
+    possible GPU! 🎉</li>
+</ul>
+</li>
+<li><strong>Linux:</strong><ul>
+<li>Open your terminal</li>
+<li>Type <code>lspci | grep VGA</code> and press Enter.</li>
+<li>Names like <code>NVIDIA</code>, <code>AMD</code>, or <code>Radeon</code> mean you might have a
+    compatible GPU! 🎈</li>
+</ul>
+</li>
+</ol>
+<h3 id="is-my-gpu-ready-for-deep-learning">🚀 Is My GPU Ready for Deep Learning?<a class="headerlink" href="#is-my-gpu-ready-for-deep-learning" title="Permanent link">&para;</a></h3>
+<p>Think of your GPU like a superhero. It might be ready to fly and save
+the world, or it might still be training to get there. In the industry
+the widely supported GPUs are <code>NVIDIA</code> GPUs. Deep Learning Frameworks
+like <code>PyTorch</code> and <code>TensorFlow</code> mainly support <code>NVIDIA</code>, while it is
+possible for <code>TensorFlow</code> to use <code>AMD</code> GPUs, it will be a very big task
+to get this working.</p>
+<p>Check out some reviews on your GPU related to deep learning tasks. Keep
+an eye out for things like <code>CUDA cores</code> (These are the magic units that
+help with AI), and how new your GPU is.</p>
+<p>Newer models usually come with more powers!</p>
+<h3 id="what-if-i-dont-have-a-hero-gpu">💭 What if I Don’t Have a Hero GPU?<a class="headerlink" href="#what-if-i-dont-have-a-hero-gpu" title="Permanent link">&para;</a></h3>
+<p>Don’t worry! Even if your GPU isn’t that superhero for deep learning, or
+if you don’t have a GPU, you can still train AI models! There are many
+magic clouds up in the sky, where alot of powerful GPUs live. These
+places let you use their superhero GPU for a while, for a small price or
+often even for free!</p>
+<p>Here are some to look at: </p>
+<ol>
+<li><strong><a href="https://colab.google/">Google Colab</a>:</strong>
+This is like a magic playground. It gives you a notebook (a magic book
+where you can write code and see results). The best part? It comes with
+a free GPU! Just remember, if you play for too long, the playground
+might ask you to take a break. </li>
+<li><strong><a href="https://www.paperspace.com/">Paperspace</a>:</strong>
+This is a realm where you can summon powerful computers with strong GPUs. You can use them for
+a few coins, but they are super fast and worth it! </li>
+<li><strong><a href="https://www.kaggle.com/code">Kaggle Notebooks</a>:</strong> 
+This place is like a training ground for wizards and witches wanting to experiment. They also
+offer free GPUs. You can practice, learn, and share with other learners
+here.</li>
+</ol>
+<h3 id="quick-recap">🔍 Quick Recap<a class="headerlink" href="#quick-recap" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Check your GPU brand.</li>
+<li>See if it’s a superhero-level GPU for deep learning.</li>
+<li>If not, visit one of the magic clouds to borrow their power.</li>
+</ul>
+<p>In the next section, we’ll look at setting up the magic spells
+(software) we need to start our deep learning journey! 🌌🔮</p>
+<h2 id="getting-the-necessary-software">Getting the Necessary Software<a class="headerlink" href="#getting-the-necessary-software" title="Permanent link">&para;</a></h2>
+<p>Before we can cast these deep learning spells, we need to gather the
+correct ingredients. Think of them as the potions and scrolls needed by
+wizards before casting their spells</p>
+<h3 id="cuda-the-magical-portal-between-worlds">🧙‍♂️ CUDA: The Magical Portal Between Worlds<a class="headerlink" href="#cuda-the-magical-portal-between-worlds" title="Permanent link">&para;</a></h3>
+<p>Imagine a big magical world, where every sparkle ✨ of magic is a small
+calculation. This realm is huge and beautiful, with millions of sparkles
+every second. Now, think of a portal 🌀 that allows wizards to travel
+between our world, and this magical world. Whenever they are in the
+magical world, they can use all these tiny sparkles of magic. This
+portal is what we call <code>CUDA</code> 💡. Which officialy stands for
+<code>Compute Unified Device Architecture</code>, yes.. i know.. i didn’t think of
+it either.</p>
+<p>In the world of computers, billions of calculations happen every second,
+especially in deep learning and AI 🤖. The main thing in deep learning
+is crunching huge amounts of data 📊, looking for pattners,
+understanding images 🖼️, recognizing a voice and even generating new
+music 🎶! This requires soo much power.</p>
+<p><strong>So, what about this <code>CUDA</code>?</strong> 🧐</p>
+<p><code>CUDA</code> is a magical language and set of tools, created by <code>NVIDIA</code>,
+which allows our software (the spells we cast ✨) to communicate
+directly with <code>NVIDIA GPUs</code>. With <code>CUDA</code> we can tell the GPU precisely,
+which calculations to perform and in what order, so we can truly
+maximize it’s power 🚀.</p>
+<p>Just think of it like this: <code>CUDA</code> helps our computer and GPU talk to
+each other so they can work together to be more powerful (Gogeta vs
+Vegito anyone? 🥊)</p>
+<p>Without <code>CUDA</code>, our journey into deep learning would be like trying to
+go mining in those pesky Minecraft caves. With <code>CUDA</code>, it’s like we’ve
+got an enchanted pickaxe ⛏️✨, that lights up the caves when we are
+digging. Wouldn’t we all want a pickaxe like that? 😄</p>
+<h3 id="checking-cuda-compatibility-with-your-gpu">👁‍🗨 Checking CUDA compatibility with your GPU<a class="headerlink" href="#checking-cuda-compatibility-with-your-gpu" title="Permanent link">&para;</a></h3>
+<p>To use this powerful tool, our GPU needs to be able to read this CUDA
+spellbook. Most newer GPUs are trained in this art, but to make sure,
+you can visit the <a href="https://developer.nvidia.com/cuda-gpus">NVIDIA CUDA GPUs
+page</a>. If you see your GPU
+listed here, you are fully ready for this magical journey!</p>
+<h3 id="installing-cuda">🔮 Installing CUDA<a class="headerlink" href="#installing-cuda" title="Permanent link">&para;</a></h3>
+<p>Now how do we get this beautiful spellbook?</p>
+<p>That’s the beauty… we don’t need to!</p>
+<p>In a future step, where we will be installing a popular deep learning
+library, <code>CUDA</code> will be installed for you 💝.</p>
+<p>How easy is that?!</p>
+<h2 id="setting-up-python">Setting up Python 🐍<a class="headerlink" href="#setting-up-python" title="Permanent link">&para;</a></h2>
+<p>🚀 Things are starting to get exciting! Remember how wizards use special
+words to cast spells? Well, in our deep learning adventure, we will be
+using a magical language called <code>Python</code> 🐍 to write our very own spells
+🤯 (which are like computer programs!).</p>
+<p>Just like how every magician needs to know special words to create
+magic, we need to setup <code>Python</code> to start creating our deep learning
+spells.</p>
+<p>Let’s dive in and get our magic toolkit ready! 🎩✨</p>
+<h3 id="the-magic-of-virtual-environments">The Magic of Virtual Environments 🌍✨<a class="headerlink" href="#the-magic-of-virtual-environments" title="Permanent link">&para;</a></h3>
+<p>Have you ever seen a magician pull a rabat out of a hat 🐰? or make
+things float in a specififc magic room? Now imagine if a magician would
+be doing all their tricks in that same room. Things would get very
+messy… full of floating rabbits and stuff 😂 (kinda cool though…)</p>
+<p>This is where virtual environments come in. Think of these as special
+magic rooms, where we can practice a specific spell, without affecting
+all the other spells we might have.</p>
+<p>By using these rooms, we make sure our magic spells (or code..) don’t
+interfere with eachother and always work the way we want them to.</p>
+<p>In the coding world, this makes sure that all the different projects we
+will have, can have their own settings, their own libraries, and even
+their own version of Python, without messing up the other projects.</p>
+<p>To create a virtual environment, we will first need our basic version of
+Python installed (which we can then use to create these magic rooms).</p>
+<h3 id="setting-up-our-magic-language-python-with-pip">Setting up our magic language: Python (with <code>pip</code>)<a class="headerlink" href="#setting-up-our-magic-language-python-with-pip" title="Permanent link">&para;</a></h3>
+<h4 id="what-the-hell-is-pip">What the hell is pip 😵‍💫?<a class="headerlink" href="#what-the-hell-is-pip" title="Permanent link">&para;</a></h4>
+<p>Imagine you’re a wizard, you’re progressing and you’re discovering there
+are so many spells, more then what u already know. How do add all these
+beautiful spells to your spellbook?</p>
+<p>This is where <code>pip</code> comes in!</p>
+<p>It’s like a magical scroll that let’s you add more and more spells (or
+tools) that other wizards have created, all to our own spellbook!</p>
+<p>Want to play with images or sounds? Ask <code>pip</code> to bring you the right
+spells! (or in the real world, the library).</p>
+<p>Now how do we set all this up?</p>
+<h4 id="how-to-install">How to install<a class="headerlink" href="#how-to-install" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Go to <a href="https://www.python.org/downloads/">Python’s official website</a>
+    and download the latest version.</li>
+<li>Open the installer you download, and follow the instructions. *Make
+    sure to check the box that says <code>Add Python to PATH</code> during
+    installation (this so we can use python from anywhere on our PC)</li>
+</ol>
+<p>Now let’s make sure everything. To do that we will need to start using
+the command line.</p>
+<h3 id="the-wizards-crystal-ball">The wizards crystal ball 🔮<a class="headerlink" href="#the-wizards-crystal-ball" title="Permanent link">&para;</a></h3>
+<p>Before we check our Python installation, we need to get to know one of
+the most important tools for a wizard: The Crystal Ball, or in
+professional terms - the Command Line (for Windows) or the Termianl (for
+Mac and Linux).</p>
+<h4 id="what-is-the-command-lineterminal">What is the Command Line/Terminal?<a class="headerlink" href="#what-is-the-command-lineterminal" title="Permanent link">&para;</a></h4>
+<p>Imagine you have a crystal ball. Whenever you ask it something, you’re
+actually giving it a command, and the crystal ball executes this command
+for you instantly.</p>
+<p>The command line or terminal is exactly like that crystall ball! It’s a
+place where you enter commands, and the computer immediatly does what
+you tell it to.</p>
+<h4 id="how-to-access-your-crystal-ball">How to access your crystal ball<a class="headerlink" href="#how-to-access-your-crystal-ball" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Windows Users 🪟</strong></p>
+<p>Press the <code>Windows + R</code> keys together, a small
+window will pop up. Type <code>cmd</code> and press Enter. This will open up
+the command Line.</p>
+</li>
+<li>
+<p><strong>Mac Users 🍏</strong></p>
+<p>Press <code>Command + Space</code> to open up Spotlight. Type
+<code>terminal</code> and press Enter.</p>
+</li>
+<li>
+<p><strong>Linux Users 🐧</strong></p>
+<p>This varies a bit depending on which
+distribution u use, but usually, you can find the Terminal in your
+applications menu or using your keyboard shortcuts like
+<code>ctrl + alt + t</code>.</p>
+</li>
+</ul>
+<h3 id="checking-our-python-using-our-crystal-ball">Checking our Python using our Crystal Ball<a class="headerlink" href="#checking-our-python-using-our-crystal-ball" title="Permanent link">&para;</a></h3>
+<p>Now that we know how to open our crystal ball, we can give it some
+commands to check out if Python is succesfully installed:</p>
+<ol>
+<li>Open your crystal ball</li>
+<li>Type <code>python --version</code> and press Enter</li>
+<li>
+<p>The crystal ball should tell you which version of Python you have
+    installed. If it does, that means your Python spellbook, is ready to
+    work! If not, it means your Python was not installed correctly. Try
+    following the Python installation steps again, or leave a
+    comment/email and i will try my best to help you.</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">C:\Users\rvanh&gt;python --version</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go">Python 3.10.11</span>
+</span></code></pre></div>
+</li>
+</ol>
+<h4 id="checking-our-pip-install">Checking our pip install<a class="headerlink" href="#checking-our-pip-install" title="Permanent link">&para;</a></h4>
+<p>On the same note as checking for Python, we can check for <code>pip</code>.</p>
+<ol>
+<li>
+<p>In the same crystal ball type in: <code>pip --version</code></p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">C:\Users\rvanh&gt;pip --version</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">pip 23.1.2 from C:\Python310\lib\site-packages\pip (python 3.10)</span>
+</span></code></pre></div>
+</li>
+</ol>
+<p>If it shows a version number, you are good to go!</p>
+<h2 id="creating-our-first-virtual-environment">Creating our first Virtual Environment<a class="headerlink" href="#creating-our-first-virtual-environment" title="Permanent link">&para;</a></h2>
+<p>Setting up our first magic room (or virtual environment) is super easy!</p>
+<p>Open your explorer, and create a folder on your computer where you
+would like to store all your deep learning projects.  <em>Mine is
+located in <code>D:\Development\AI</code></em></p>
+<ol>
+<li>
+<p><strong>Windows Users 🪟:</strong></p>
+<ul>
+<li>
+<p>In your crystal ball, we have to go to the folder we just
+    created, using a spell called <code>cd</code> - which stands for
+    <code>change directory</code>. In my case i would type:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;D:\Development\AI&quot;</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>If the folder you have created is on a different drive then the
+    default, in my case <code>C</code> drive, the windows command prompt can
+    sometimes be a bit weird, in my situation it did change the
+    directory succesfully, but it doesn’t display it yet:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">cd &quot;D:\Development\AI&quot;</span>
+</span></code></pre></div>
+<p>In this case, we would need to tell our crystal ball to work in
+this different drive - which in my case is the <code>D</code> drive. We can
+simply do that by writing <code>[Drive Letter]:</code>, so i would enter:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">D:</span>
+</span></code></pre></div>
+<p>and then press enter:
+<div class="language-console highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">cd &quot;D:\Development\AI&quot;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">D:</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Since we are now in the folder that holds all our AI projects,
+    let’s create a folder for our first project, which will be a
+    “Sample Classifier (more on that later)”:
+    <div class="language-console highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">cd &quot;D:\Development\AI&quot;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go">D:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="hll"><span class="go">mkdir sample-classifier</span>
+</span></span></code></pre></div></p>
+</li>
+<li>
+<p>Now let's move into that directory:
+    <div class="language-console highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">cd &quot;D:\Development\AI&quot;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="go">D:</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">mkdir sample-classifier</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="hll"><span class="go">cd sample-classifier</span>
+</span></span></code></pre></div></p>
+</li>
+<li>
+<p>Now that we are here, we can create our virtual environment, using the syntax:</p>
+<p><code>python -m venv [name-of-environment]</code></p>
+<p>Where [name-of-environment] can be anything you want it to be,<br />
+let's name ours <code>sample-classifier-env</code></p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">cd &quot;D:\Development\AI&quot;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">D:</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">mkdir sample-classifier</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">cd sample-classifier</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="hll"><span class="go">python -m venv sample-classifier-env</span>
+</span></span></code></pre></div>
+</li>
+<li>
+<p>Our new magical room has been created, now let's tell our crystal ball, that from now on we use this room!
+    <em>Anytime you want to work on this project, make sure to execute the following step, so your computer knows which room to use</em></p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">cd &quot;D:\Development\AI&quot;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">D:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">mkdir sample-classifier</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">cd sample-classifier</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">python -m venv sample-classifier-env</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="hll"><span class="go">sample-classifier-env\Scripts\activate</span>
+</span></span></code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Mac and Linux Users 🍏🐧</strong></p>
+<ul>
+<li>
+<p>Tell your crystal ball to move to our newly created folder, using a spell called <code>cd</code>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;/home/Development/AI&quot;</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>We are now in the place that will hold our AI projects,
+    let’s make a seperate place for our first project, a
+    “Sample Classifier (more on that later)”:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;/home/Development/AI&quot;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="hll">mkdir<span class="w"> </span>sample-classifier
+</span></span></code></pre></div></p>
+</li>
+<li>
+<p>Let's go into that directory:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;/home/Development/AI&quot;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>mkdir<span class="w"> </span>sample-classifier
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="hll"><span class="nb">cd</span><span class="w"> </span>sample-classifier
+</span></span></code></pre></div></p>
+</li>
+<li>
+<p>Now we can create our virtual environment, the following syntax is used for creating a environment:</p>
+<p><code>python -m venv [name-of-environment]</code></p>
+<p>[name-of-environment] can be any name you want,<br />
+We named it <code>sample-classifier-env</code></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;/home/Development/AI&quot;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>mkdir<span class="w"> </span>sample-classifier
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">cd</span><span class="w"> </span>sample-classifier
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="hll">python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>sample-classifier-env<span class="w">        </span>
+</span></span></code></pre></div>
+</li>
+<li>
+<p>Our room has been created, now we need to use this room!
+    <em>Anytime you want to work on this project, make sure to tell the computer which room to use</em></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;/home/Development/AI&quot;</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mkdir<span class="w"> </span>sample-classifier
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nb">cd</span><span class="w"> </span>sample-classifier
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>sample-classifier-env
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="hll"><span class="nb">source</span><span class="w"> </span>sample-classifier-env/bin/activate<span class="w">        </span>
+</span></span></code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+<p>You will know your virtual environment is active when you see its name on the left side of your command line or terminal. This room will help keep all your magical deep learning experiments organized and separate!</p>
+<p>Whenever you want to leave the circle, just type <code>deactivate</code> in your command line or terminal.</p>
+<h2 id="installing-our-deep-learning-library">Installing our Deep Learning library<a class="headerlink" href="#installing-our-deep-learning-library" title="Permanent link">&para;</a></h2>
+<p>While we are getting deeper into the deep learning world, we need to equip ourselves with the right AI tools. Just like a wizard has their favorite wand, in deep learning, we have several libraries we can use. Each have their own unique capabilities and strenghts.</p>
+<h3 id="lets-look-into-the-chamber-of-libraries">Let's look into the chamber of libraries<a class="headerlink" href="#lets-look-into-the-chamber-of-libraries" title="Permanent link">&para;</a></h3>
+<p>Before we dive in, let's look at the different tools we can use:</p>
+<ul>
+<li>
+<p><strong>TensorFlow 🌊:</strong><br />
+Created by the wizards from Google, TensorFlow is very versatile and widely used. It gives you many high-level and low-level tools, this way it's usable for everyone, from beginner to the most powerful wizards.</p>
+</li>
+<li>
+<p><strong>PyTorch 🔥:</strong><br />
+Coming from Facebook's (or Meta nowadays...) school of sorcery, PyTorch is like a spellbook that changes and adapts while you are casting spells. Being this flexible allows wizards to experiment as much as they please, making it loved by people who love to tinker and innovate in their magic.</p>
+</li>
+<li>
+<p><strong>FastAI 🌪️:</strong><br />
+A rising star in this world of deep learning. FastAI is built on top of PyTorch. People celebrate it, because it's super user-friendly and being able to get world-class results with very little code. This library is the perfect example of a "magic spell" - being able to achieve great things with simple incantations.</p>
+</li>
+</ul>
+<p>There are many libraries to choose from, but for our journey, we will be using the great power of <strong>FastAI</strong>! Being able to achieve beautiful results very fast, and then dive deeper and use the power of PyTorch to tinker and innovate when we feel ready, is a power we can't pass up on.</p>
+<h3 id="installing-fastai-equipping-our-spellbook">Installing FastAI: Equipping our Spellbook 📖<a class="headerlink" href="#installing-fastai-equipping-our-spellbook" title="Permanent link">&para;</a></h3>
+<p>Because FastAI is built on top of PyTorch, we will first have to install and setup PyTorch. Just like gathering the base ingredients to create a powerful potion.</p>
+<ol>
+<li>
+<p><strong>Setting up PyTorch 🔥:</strong> </p>
+<p>While i will show you the current way to install PyTorch, make sure to check out <a href="https://pytorch.org/get-started/locally/">PyTorch's official installation guide</a>, since the world of AI changes fast, and the version we will currently be installing, might be replaced tomorrow.</p>
+<p>On the PyTorch installation guide, we have to choose between several options:</p>
+<ul>
+<li>
+<p><strong>PyTorch Build:</strong><br />
+Do you want to play with the newest features, which can have bugs, or do you want to work with a stable version?<br />
+We will choose `Stable`` (which is currently on version 2.0.1)</p>
+</li>
+<li>
+<p><strong>Your OS:</strong><br />
+Choose the operating system you are using, we will be using <code>Windows</code></p>
+</li>
+<li>
+<p><strong>Package:</strong><br />
+This is where we choose, <em>how</em> we want to install PyTorch.
+Since we have been using <code>pip</code> so far, we will choose <code>Pip</code></p>
+</li>
+<li>
+<p><strong>Computer Platform:</strong><br />
+Here we choose what hardware we want to use with PyTorch.
+CUDA gives us the ability to use our GPU, while the CPU option
+will install PyTorch, with only CPU capabilities. Choosing
+CUDA is the best of both worlds, we can still use the CPU if
+we wanted. We will choose the latest supported CUDA version by our GPU, which currently is <code>CUDA 11.8</code></p>
+</li>
+</ul>
+<p>Having selected our options, the installation guide will show us what command to run to install PyTorch. The command which shows up for us currently is:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>torchvision<span class="w"> </span>torchaudio<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu118
+</span></code></pre></div>
+<p>So in our crystal ball (Command Prompt/Terminal) enter this exact command.</p>
+<p><em>If you have closed the command prompt after the last steps, make sure to open it again, <code>cd</code> into the correct directory and <code>activate</code> our magic room as described above</em></p>
+</li>
+<li>
+<p><strong>Installing FastAI 🌪️:</strong>  </p>
+<p>With PyTorch as our foundation, it is now time to summon <code>FastAI</code>. In your crystal ball, enter:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>pip<span class="w"> </span>install<span class="w"> </span>fastai
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Verifying our installation 🔍:</strong>  </p>
+<p>To make sure that FastAI and PyTorch are ready to play with, we can run a quick test!</p>
+<p>In your crystal ball enter:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import fastai; print(fastai.__version__)&quot;</span>
+</span></code></pre></div></p>
+<p>If everything went the way we want things to go, our crystal ball will tell you the version number of FastAI. If you see the version number, it is ready to be used for our deep learning quests!</p>
+</li>
+</ol>
+<h2 id="testing-your-setup">Testing Your Setup 🧪<a class="headerlink" href="#testing-your-setup" title="Permanent link">&para;</a></h2>
+<p>Now that we have all our magic tools, let's make sure everything is working by checking if our GPU is setup correctly.</p>
+<h3 id="running-a-simple-deep-learning-spell">Running a Simple Deep Learning Spell<a class="headerlink" href="#running-a-simple-deep-learning-spell" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Preparing our spell:</strong></p>
+<p>Remember! Make sure your magic room is activated before we get started!</p>
+</li>
+<li>
+<p><strong>Casting our GPU checker:</strong></p>
+<p>Run the following command:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from fastai.vision.all import *; print(torch.cuda.is_available())&quot;</span>
+</span></code></pre></div>
+<p>This usefull spell asks FastAI and PyTorch to check if they can find and use the GPU. If they can, they should respond with <code>True</code>.</p>
+</li>
+</ol>
+<h3 id="understanding-the-output">Understanding the output 🔮<a class="headerlink" href="#understanding-the-output" title="Permanent link">&para;</a></h3>
+<p>If you saw <code>True</code>, congratulations! 🎉, your GPU is ready to lend you it's powers!</p>
+<p>If you saw <code>False</code>, don't worry. It might mean your system is not using GPU acceleration. This can be because of different reasons, maybe the GPU is not supported, or perhaps there is a slight misconfiguration somewhere.</p>
+<p>For example i had this issue, because on the PyTorch website it uses <code>pip3</code> in the command. However, we have been using <code>pip</code> until now. Usually this should be fine, but if you have multiple python installation on your computer, both versions of pip could be pointing to different installations. Running the command using <code>pip</code> fixed it for me.</p>
+<p>If your GPU might not be supported, you can always use cloud providers like <code>Google Colab</code> to borrow the power of the GPUs in the magical clouds.</p>
+<p>Anyway, it's great practise to understand and test your tools. Doing this will make you know your wand and spellbook for when you plan to cast bigger and more complex spells!</p>
+<h2 id="the-magical-book-jupyter-notebooks">The Magical Book: Jupyter Notebooks 📖<a class="headerlink" href="#the-magical-book-jupyter-notebooks" title="Permanent link">&para;</a></h2>
+<p>Imagine having access to a book that reacts to you spells immediatly when you enter them, where you can draw diagrams, make notes, and even have conversations with. In the world of deep learning, this magical book is known as a Jupyter Notebook.</p>
+<h3 id="what-makes-jupyter-notebooks-so-special">What makes Jupyter Notebooks so special?<a class="headerlink" href="#what-makes-jupyter-notebooks-so-special" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Interactive Spells:</strong></li>
+</ol>
+<p>Write a spell (or code) and see it's effects immediatly. This instant feedback makes it perfect for experimentation</p>
+<ol>
+<li><strong>Blend of Text and Magic:</strong></li>
+</ol>
+<p>Combine notes, diagrams and code in one place. It's like having a spellbook with annotations!</p>
+<ol>
+<li><strong>Shareable:</strong></li>
+</ol>
+<p>Once you have perfected a spell or discovered something new, you can easily share it with other wizards.</p>
+<h3 id="how-to-get-this-magical-book">How to get this magical book?<a class="headerlink" href="#how-to-get-this-magical-book" title="Permanent link">&para;</a></h3>
+<ol>
+<li>When you are in your virtual environment (or magical room), simply write:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>pip<span class="w"> </span>install<span class="w"> </span>jupyter
+</span></code></pre></div>
+<ol>
+<li>To open the book and begin writing your spells, write:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>jupyter<span class="w"> </span>notebook
+</span></code></pre></div>
+<p>A portal will open in your browser, which leads you to your Jupyter environment.</p>
+<h2 id="mastering-your-magical-book">Mastering Your Magical Book 🧙‍♂️📖<a class="headerlink" href="#mastering-your-magical-book" title="Permanent link">&para;</a></h2>
+<h3 id="starting-with-a-new-notebook">Starting with a new notebook<a class="headerlink" href="#starting-with-a-new-notebook" title="Permanent link">&para;</a></h3>
+<p>Let's create a new notebook in our brand new environment:</p>
+<ul>
+<li>Click the <code>New</code> button on the top right</li>
+<li>Choose <code>Notebook</code></li>
+</ul>
+<p>Welcome to your first notebook!</p>
+<h3 id="cells-the-heartbeats-of-jupyter">Cells - The Heartbeats of Jupyter<a class="headerlink" href="#cells-the-heartbeats-of-jupyter" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Each notebook consists of cells. Each cell can contain code or written text (in <code>Markdown</code>)</li>
+<li>By default a cell will be of type <code>Code</code>, to test this out select the first cell and type in
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+</span></code></pre></div></li>
+<li>To run a cell, click on it and press <code>Shift + Enter</code>. The result will be displayed right under the cell. Try it out and see the result of our very difficult calculation!
+A new cell will be automatically created for you.</li>
+<li>To change a cell's type, use the dropdown menu at the top. Choose <code>Code</code> for Python code or <code>Markdown</code> for written text. Try it out now by selecting <code>Markdown</code> for the second cell</li>
+</ul>
+<h3 id="writing-and-formatting-text">Writing and Formatting Text:<a class="headerlink" href="#writing-and-formatting-text" title="Permanent link">&para;</a></h3>
+<ul>
+<li>To write titles, use the hashtag (<code>#</code>). For example write, <code># Title</code>, this will turn into a big title. <code>## Subtitle</code> will give a slightly smaller one, and so on.</li>
+<li>To make text bold, wrap it in double asterisks like <code>**this is bold**</code>.</li>
+<li>For bullet points, use dashes (<code>-</code>) or asterisks (<code>*</code>).</li>
+</ul>
+<p><a href="https://itsfoss.com/markdown-guide/">Read more about markdown</a></p>
+<h3 id="saving-and-closing-your-notebook">Saving and Closing Your Notebook:<a class="headerlink" href="#saving-and-closing-your-notebook" title="Permanent link">&para;</a></h3>
+<ul>
+<li>To save your work, click on the floppy disk icon on the top left or press <code>Ctrl + S</code> (or <code>Cmd + S</code> on Mac).</li>
+<li>When done, click on the <code>File</code> menu and choose <code>Close and Shut Down Notebook</code> to shutdown the notebook. This ensures the spells (codes) you've been running also stop.</li>
+</ul>
+<h3 id="tips-to-have-a-great-jupyter-time">Tips to have a GREAT Jupyter time:<a class="headerlink" href="#tips-to-have-a-great-jupyter-time" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Autocomplete is your friend! While writing code, press <code>Tab</code> to autocomplete Python functions or variable names.</li>
+<li>If your notebook ever gets stuck, go to the <code>Kernel</code> menu and choose <code>Restart Kernel...</code>. This acts like a mgaical reset button, refreshing your environment.</li>
+</ul>
+<h3 id="venturing-further">Venturing Further:<a class="headerlink" href="#venturing-further" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Jupyter Notebooks have many built-in functionalities, like magic commands (commands starting with <code>%</code>). For example, <code>%time</code> before a spell (code) will show you how long it takes to run.</li>
+<li>You can also look at data, plot graphs, and even embed videos. The limits are endless!</li>
+</ul>
+<p>Remember, Jupyter Notebooks are more then just a tool. It's your companion in this deep learning journey. The more you work with it, the better you will get!</p>
+<h2 id="conclusion">Conclusion 🎉<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>The journey to becoming a deep learning magician is enchanting but very complex, and today, we have taken a very big step preparing for our journey! Here's what we did today:</p>
+<ul>
+<li><strong>Introduction to this Magical Realm:</strong></li>
+</ul>
+<p>We've look at the importance of GPUs in boosting our spells and looked at using CUDA to harness it's power</p>
+<ul>
+<li><strong>Setting up our Magical Language:</strong></li>
+</ul>
+<p>With Python as our trusty spellbook, we are ready to cast our spells. We learned about the <code>pip</code> wand and created our own magic room, a virtual environment, to keep our spells organized.</p>
+<ul>
+<li><strong>The chamber of libraries:</strong></li>
+</ul>
+<p>We looked at the rich world of deep learning libraries, looking at the benefits of each. We have chosen FastAI as our companion and we made sure it was equipped with the power of PyTorch.</p>
+<ul>
+<li><strong>Testing the waters:</strong></li>
+</ul>
+<p>We tested our setup, to make sure all our powers are ready to use for our upcoming adventures.</p>
+<h2 id="a-glimbse-beyond-the-horizon">A Glimbse Beyond the Horizon 🌅<a class="headerlink" href="#a-glimbse-beyond-the-horizon" title="Permanent link">&para;</a></h2>
+<p>In our next post, we are going to look deeper into FastAI. We are going to look at deciphering the melodies and rhythms of the world around us by working on a audio sample classifier. Think about this, by the end of our next session, you will be able to play a drum sound to your computer - wether it's a kick or snare - and it will magically tell you what type of sound it is!</p>
+<p>So keep your wands ready and spellbooks open. The world of deep learning is right around the corner!</p>
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+        
+          
+          <a href="../../15/finding-acquiring-data-the-cornerstone-of-magical-models/" class="md-footer__link md-footer__link--next" aria-label="Next: Finding &amp; Acquiring Data: The Cornerstone of Magical Models 🧙‍♂️🔍" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Finding & Acquiring Data: The Cornerstone of Magical Models 🧙‍♂️🔍
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 <a href="https://github.com/raynoldvanheyningen"  target="_blank" rel="noopener">Raynold van Heyningen</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/raynoldvanheyningen" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/raynoldvanheyningen/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.4e31edb1.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1251 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../12/setting-up-your-machine-for-deep-learning/">
+      
+      
+        <link rel="next" href="../../22/preparing-the-data-opening-our-toy-box/">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.0-b3">
+    
+    
+      
+        <title>Finding & Acquiring Data: The Cornerstone of Magical Models 🧙‍♂️🔍 - Deep Learning with Ray</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.83068744.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#finding-acquiring-data-the-cornerstone-of-magical-models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Deep Learning with Ray" class="md-header__button md-logo" aria-label="Deep Learning with Ray" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Deep Learning with Ray
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Finding & Acquiring Data: The Cornerstone of Magical Models 🧙‍♂️🔍
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../../" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Deep Learning with Ray" class="md-nav__button md-logo" aria-label="Deep Learning with Ray" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Deep Learning with Ray
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            </a>
+            
+              <label class="md-nav__link " for="__nav_1">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          <label class="md-nav__link" for="__nav_1_3" id="__nav_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/deep-learning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deep Learning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../category/setting-up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-essence-of-data-in-deep-learning" class="md-nav__link">
+    The Essence of Data in Deep Learning
+  </a>
+  
+    <nav class="md-nav" aria-label="The Essence of Data in Deep Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-foundation" class="md-nav__link">
+    Understanding the Foundation 🏰
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigating-the-grand-halls-of-data" class="md-nav__link">
+    Navigating the Grand Halls of Data 🌍🔍
+  </a>
+  
+    <nav class="md-nav" aria-label="Navigating the Grand Halls of Data 🌍🔍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-importance-of-choosing-the-right-data" class="md-nav__link">
+    The Importance of Choosing the Right Data 🗝️📜
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discovering-great-repositories" class="md-nav__link">
+    Discovering Great Repositories 📚🌌
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-adventure-of-acquiring-data" class="md-nav__link">
+    The Adventure of Acquiring Data 🌄🎒
+  </a>
+  
+    <nav class="md-nav" aria-label="The Adventure of Acquiring Data 🌄🎒">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-map-identifying-data-needs" class="md-nav__link">
+    Reading the Map: Identifying Data Needs 🗺️🔍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#going-on-the-quest" class="md-nav__link">
+    Going on the Quest 🥾🌲
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-our-dataset-crafting-the-beat-of-magic" class="md-nav__link">
+    Creating our Dataset: Crafting the Beat of Magic 🥁🎶
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating our Dataset: Crafting the Beat of Magic 🥁🎶">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assembling-our-ingredients-getting-sample-packs" class="md-nav__link">
+    Assembling our Ingredients: Getting Sample Packs 📦✨
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laying-down-the-foundations-dataset-structure" class="md-nav__link">
+    Laying Down the Foundations: Dataset Structure 🏰📂
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sorting-the-magic-organizing-samples" class="md-nav__link">
+    Sorting the Magic: Organizing Samples 🗄️🔮
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification-refinement" class="md-nav__link">
+    Verification &amp; Refinement 🧙‍♂️🔍
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#peering-into-our-chosen-scroll" class="md-nav__link">
+    Peering into our Chosen Scroll
+  </a>
+  
+    <nav class="md-nav" aria-label="Peering into our Chosen Scroll">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    Setup ⚙️
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summoning-our-first-sound-audio-playback" class="md-nav__link">
+    Summoning our first sound: Audio Playback 🎧🪄
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-heartbeat-of-our-samples-visualizing-waveforms" class="md-nav__link">
+    The heartbeat of our samples: Visualizing Waveforms 📈🌊
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-our-durations" class="md-nav__link">
+    Understanding our durations ⏳📊
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dissecting-the-frequency-domain-spectogram-analysis" class="md-nav__link">
+    Dissecting the Frequency Domain: Spectogram Analysis 🌌📊
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#our-audio-type-distribution-class-sample-counts" class="md-nav__link">
+    Our Audio Type Distribution: Class Sample Counts 🎲📋
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://www.github.com/RaynoldVanHeyningen.png" alt="Raynold van Heyningen">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>Raynold van Heyningen</strong><br>
+                      Deep Learning
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__title">
+                <div class="md-nav__link">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+              </li>
+              <li class="md-nav__item">
+                <div class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                  <time datetime="2023-08-15 00:00:00" class="md-ellipsis">August 15, 2023</time>
+                </div>
+              </li>
+              
+              
+                <li class="md-nav__item">
+                  <div class="md-nav__link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z"/></svg>
+                    <span class="md-ellipsis">
+                      in
+                      
+                        <a href="../../../../category/deep-learning/">Deep Learning</a>, 
+                        <a href="../../../../category/data/">Data</a></span>
+                  </div>
+                </li>
+              
+              
+                
+                <li class="md-nav__item">
+                  <div class="md-nav__link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                    <span class="md-ellipsis">
+                      
+                        13 min read
+                      
+                    </span>
+                  </div>
+                </li>
+              
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+
+<h1 id="finding-acquiring-data-the-cornerstone-of-magical-models">Finding &amp; Acquiring Data: The Cornerstone of Magical Models 🧙‍♂️🔍<a class="headerlink" href="#finding-acquiring-data-the-cornerstone-of-magical-models" title="Permanent link">&para;</a></h1>
+<p>Welcome back! Deep Learning sorcerers of the future! 🌌</p>
+<p>If deep learning was a spell, then data would be it's most powerful ingredient. 📜✨ While in our previous chapter, we gave ourselves the right tools and spells, this chapter will guide us into the heart of every magic model: <strong>data</strong>.</p>
+<!-- more -->
+
+<p>Imagine trying to cast a spell, without it's magic essence. 🚫🔮 That's just the same as trying to cast a deep learning spell without data. In both scenarios, our trials would fail. For any deep learning spell to work, they need data. 💧🧠</p>
+<p>Join me as we go on a expedition across the great halls filled with scrolls of knowledge. 
+We will go from the chambers of <code>Kaggle</code> to the shelves of <code>UCI</code>. 🏰🗺️ Together, we wont only learn to find these scrolls, but also to understand and choose the ones that fit our goal.</p>
+<h2 id="the-essence-of-data-in-deep-learning">The Essence of Data in Deep Learning<a class="headerlink" href="#the-essence-of-data-in-deep-learning" title="Permanent link">&para;</a></h2>
+<h3 id="understanding-the-foundation">Understanding the Foundation 🏰<a class="headerlink" href="#understanding-the-foundation" title="Permanent link">&para;</a></h3>
+<p>Deep Learning is a powerful combination between algorithsm and computations. But remove all these spells and you will discover that the heart of this magic is, and always will be, <strong>data</strong>. 📜✨</p>
+<p>Imagine a young wizard, eager to learn a new spell. Without a spellbook to guid him, or a mentor to show the way, he would be walking a <strong>very</strong> difficult path. In the world of deep learning, data acts as that all important spellbook, guiding our models to success.</p>
+<p><strong>Why is data so important:</strong></p>
+<ol>
+<li>
+<p><strong>Training Ground:</strong></p>
+<p>Just like a newbie learns by practicing, our models learn by studying data. Each piece of data acts like a puzzle 🧩, teaching the model bit by bit, until it can see the larger picture.</p>
+</li>
+<li>
+<p><strong>Validation and Testing:</strong></p>
+<p>The moment a model is trained, it's like a wizard ready to face the challenge. Testing it with new data makes sure that our spells are effective, not just inside our academy, but in the whole world beyond 🌍</p>
+</li>
+<li>
+<p><strong>Continous Improvement:</strong></p>
+<p>Magic, just like technology, grows stronger every day. By always giving new data to our models, we make sure they adept and grow, becoming better with each spell cast. 🌱➡️🌳</p>
+</li>
+</ol>
+<p><strong>The Balance of Quanity vs. Quality: How much is enough?:</strong></p>
+<p>While it might be tempting to gather so much data it can fill a ocean (trust me, i've been there), hoping it will make our spells invincible, it's very important to strike a good balance.</p>
+<ul>
+<li>
+<p><strong>Quality:</strong></p>
+<p>A million scrolls won't help, if they are filled with nonsense. Quality data makes sure our models are learning the right lessons. It's better to have a small bit of accurate and relevant data, than heaps of irrelevant ones.</p>
+</li>
+<li>
+<p><strong>Quantity:</strong></p>
+<p>While quality is very important, quantity cannot be underestimated. A single spellbook might teach the basics, but a big library allows for a deeper understanding and mastery.</p>
+<p>To summerize, data is to deep learning what essence is to magic. And as you will discover, finding the right blend of data is a great journey in itself! 🌟</p>
+</li>
+</ul>
+<h2 id="navigating-the-grand-halls-of-data">Navigating the Grand Halls of Data 🌍🔍<a class="headerlink" href="#navigating-the-grand-halls-of-data" title="Permanent link">&para;</a></h2>
+<p>Walking through the world of deep learning, you will soon realize the huge amount of different types of data available. These grand halls are filled with scrolls and books, all of them representing unique datasets waiting to be used. But how do you decide which path to take and which scroll to use?</p>
+<h3 id="the-importance-of-choosing-the-right-data">The Importance of Choosing the Right Data 🗝️📜<a class="headerlink" href="#the-importance-of-choosing-the-right-data" title="Permanent link">&para;</a></h3>
+<p>Every project or spell you want to cast, has it's own requirements. Choosing the right data is the same as choosing the right ingredients for a potion. Making the wrong choice, and you might end up with weird results, or even worse, a spell that hits you o.O!</p>
+<ol>
+<li>
+<p>**Relevance:**duration_distribution</p>
+<p>Make sure that the data fits your problem. If you are trying to understand the song of birds 🐦, analyzing scrolls of dragon lore 🐲 won't be of much help...</p>
+</li>
+<li>
+<p><strong>Diversity:</strong></p>
+<p>The more diverse your data is, the stronger your model will be. It's like fighting different types of enemies, each of them will add a different type of experience to your power.</p>
+</li>
+<li>
+<p><strong>Freshness:</strong></p>
+<p>In the vast evolving world of magic and technology, old data, can lead to outdated solutions. Always be looking for the latest and greatest scrolls or updates to your datasets.</p>
+</li>
+</ol>
+<h3 id="discovering-great-repositories">Discovering Great Repositories 📚🌌<a class="headerlink" href="#discovering-great-repositories" title="Permanent link">&para;</a></h3>
+<p>Luckily, for young wizards like us, many great wizards of the past have put together their knowledge and made them available in big repositories. Here are a few of them where you can begin your quest:</p>
+<ol>
+<li>
+<p><strong>Kaggle:</strong></p>
+<p>Often called the 'grand arena' of data sciense, Kaggle not only offers you lots of datasets, but also challenges and competitions to test your skills.</p>
+</li>
+<li>
+<p><strong>UCI Machine Learning Repository:</strong></p>
+<p>A very trusted treasure trove of datasets, curated and maintained by the scholars of the University of California, Irvine.</p>
+</li>
+<li>
+<p><strong>Datasets from famous institutions:</strong></p>
+<p>Many magic schools 🏰 like MIT, Stanford, and Harvard release datasets for the public to use. Make sure to keep an eye out on their releases and announcements.</p>
+</li>
+</ol>
+<h2 id="the-adventure-of-acquiring-data">The Adventure of Acquiring Data 🌄🎒<a class="headerlink" href="#the-adventure-of-acquiring-data" title="Permanent link">&para;</a></h2>
+<p>Going on a quest on search for data, is much like going on a great adventure. There are maps to follow, challenges to face, and treasures to discover. But don't worry, with the right compass and guidance, you will find the hidden gems that will make your deep learning spells stronger.</p>
+<h3 id="reading-the-map-identifying-data-needs">Reading the Map: Identifying Data Needs 🗺️🔍<a class="headerlink" href="#reading-the-map-identifying-data-needs" title="Permanent link">&para;</a></h3>
+<p>Before diving in the sea of data, it's important to know, exactly what you are looking for.</p>
+<ol>
+<li>
+<p><strong>Purpose and Your Goal:</strong></p>
+<p>Write down the core goal of your deep learning model. If you're crafting a potion to heal plants 🌱, you won't be gathering ingredients from the depths of the ocean.</p>
+</li>
+<li>
+<p><strong>Features and Attributes:</strong></p>
+<p>Write down all the specifics. What kind of data points, characteristics, and information do you need? This will help you narrow down your search, to make sure you gather only what's important.</p>
+</li>
+<li>
+<p><strong>Data Format:</strong></p>
+<p>Be clear about the format you need. Are you looking for images 🖼️, text 📜, audio 🎵, or a combination?</p>
+</li>
+</ol>
+<h3 id="going-on-the-quest">Going on the Quest 🥾🌲<a class="headerlink" href="#going-on-the-quest" title="Permanent link">&para;</a></h3>
+<p>Now knowing what you are looking, it is time to start the journey into the world of data.</p>
+<ol>
+<li>
+<p><strong>Public Repositories:</strong></p>
+<p>As mentioned before, platforms like Kaggle and UCI are your go to places. Offering a wide variety of datasets that have been processed and prepared, start your quest here!</p>
+</li>
+<li>
+<p><strong>Web Scraping:</strong></p>
+<p>Sometimes the data you need lays deep in the world wide web, you can go out and acquire this data by hand, or if there's too much data to get by hand, tools like <code>Beautiful Soup</code> or <code>Scrapy</code>, can help you automate this process</p>
+</li>
+<li>
+<p><strong>APIs:</strong></p>
+<p>Many platforms and services also offer APIs that allow you to access and retrieve data.
+For example the <a href="https://developers.google.com/custom-search/v1/overview">Google Search API</a> allows to scrape the search results of google and learn about many websites that Google has discovered.</p>
+</li>
+</ol>
+<h2 id="creating-our-dataset-crafting-the-beat-of-magic">Creating our Dataset: Crafting the Beat of Magic 🥁🎶<a class="headerlink" href="#creating-our-dataset-crafting-the-beat-of-magic" title="Permanent link">&para;</a></h2>
+<p>Going into the world of deep learning, there is this magical feeling, when you create magic based on your own dataset. It's like crafting a wand from a tree you have grown yourself. The connection is deep, and the spells are truly powerful. You will know the dataset by heart, which makes working with it, so much better.</p>
+<p>In this section, let's find out how to create our own dataset, filled with samples of the drums.</p>
+<h3 id="assembling-our-ingredients-getting-sample-packs">Assembling our Ingredients: Getting Sample Packs 📦✨<a class="headerlink" href="#assembling-our-ingredients-getting-sample-packs" title="Permanent link">&para;</a></h3>
+<p>Every great potion, starts with the best ingredients. For our drum magic, we began by purchasing several high-quality sample packs. These packs are our treasure chests 🎁, filled with samples waiting to be uncovered.</p>
+<p>As a producer, you will probably already have many samples in your library, use those!</p>
+<h3 id="laying-down-the-foundations-dataset-structure">Laying Down the Foundations: Dataset Structure 🏰📂<a class="headerlink" href="#laying-down-the-foundations-dataset-structure" title="Permanent link">&para;</a></h3>
+<p>To keep our magical ingredients organized, we will create a clear structure for our dataset.
+In your file explorer, in the folder we created for our project, create several new folders using the following structure:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>dataset
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├───drums
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    ├───claps
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    ├───clicks
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    ├───cymbals
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    ├───hats_closed
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    ├───hats_open
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    ├───kicks
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    ├───percussion
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    ├───rides
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    ├───rimshots
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    ├───shakers
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    ├───snaps
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    ├───snares
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    ├───tambourines
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    └───toms
+</span></code></pre></div>
+<p>This structure will serve as our library 📚, with each folder dedicated to a specific type of sound.</p>
+<h3 id="sorting-the-magic-organizing-samples">Sorting the Magic: Organizing Samples 🗄️🔮<a class="headerlink" href="#sorting-the-magic-organizing-samples" title="Permanent link">&para;</a></h3>
+<p>With our foundation created, it is time to dive in to our purchased sample packs and begin the big task of organization. The same as sorting mystical herbs, each sample is carefully listened to and placed in the right folder.</p>
+<ul>
+<li>Kick samples go into the <code>kicks</code> folder.</li>
+<li>Snare samples will find their way in the <code>snares</code> folder</li>
+<li>The crisp sound of closed hats go to <code>hats_closed</code></li>
+<li>And so on, for all type of audio samples</li>
+</ul>
+<p>It's important that each folder is nicely balanced.
+It's better to have 100 kicks and 100 toms, then 1000 kicks and 10 toms. </p>
+<p>If you don't have enough samples for each type, make sure to remove the folders with not enough samples. Our sample classifier, won't be able to classify this type of sample anyway, so it's best not to confuse it.</p>
+<p>Be patient and precise during this task, a well-organized dataset is like a well-organized spellbook. It creates efficiency, accuracy, and a touch of pure magic.</p>
+<ul>
+<li>Because our dataset contains premium samples, we unfortunately can't share this dataset publicly. A small dataset you could start with, is <a href="https://www.kaggle.com/datasets/anubhavchhabra/drum-kit-sound-samples">Kaggle's Drum Kit Sound Samples</a></li>
+</ul>
+<h3 id="verification-refinement">Verification &amp; Refinement 🧙‍♂️🔍<a class="headerlink" href="#verification-refinement" title="Permanent link">&para;</a></h3>
+<p>When all samples are in place, we do a deep verification. Making sure all our ingredients are of the highest quality.
+We listen to the samples, checking for misplacements, and refining the organization.</p>
+<h2 id="peering-into-our-chosen-scroll">Peering into our Chosen Scroll<a class="headerlink" href="#peering-into-our-chosen-scroll" title="Permanent link">&para;</a></h2>
+<p>Every great wizards knows the importance of understanding the scrolls and spellbooks they use. Like this, before we dive in classifying samples, it's important to understand our data. This is one of the reasons i like building my own datasets, while it's a lot of work, it makes me understand the data on a deeper level.</p>
+<p>Besides that, even creating your own dataset, will usually still leave holes in your understanding of the data. So let's look at some ways that we can use to help us understand the data, it's structure and possible challenges we might need to overcome.</p>
+<h3 id="setup">Setup ⚙️<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
+<p>Let's go look at our data in a bit more technical way.</p>
+<ul>
+<li>
+<p><strong>Installing Librosa:</strong></p>
+<p>To interact with our audio sample programatically we use a great library for python called <code>librosa</code>. This is a package used for music and audio analysis.</p>
+<p>Go into your terminal/command prompt, activate our magical room (virtual environment) and run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>librosa
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Installing Seaborn:</strong></p>
+<p>Seaborn is a beautiful data visualization package based on <a href="https://matplotlib.org/">matplotlib</a>, it gives you a easy interface to work with to draw attractive and informative graphics:</p>
+<p>Run the following in your command prompt/terminal:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>seaborn
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Open up a new Jupyter notebook:</strong></p>
+<p>In the terminal/command prompt run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>jupyter<span class="w"> </span>notebook
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Make a new notebook:</strong></p>
+<p>Click on <code>New</code> in the top right of the user interface.
+Choose <code>Notebook</code></p>
+</li>
+<li>
+<p><strong>Give it a proper name:</strong></p>
+<p>I like to name the notebooks i create, so in the future i know exactly which one is which.</p>
+<p>Choose <code>File</code> and click <code>Rename...</code>
+Name it something that you can identify it from. I called it <code>analyzation.ipynb</code></p>
+</li>
+</ul>
+<h3 id="summoning-our-first-sound-audio-playback">Summoning our first sound: Audio Playback 🎧🪄<a class="headerlink" href="#summoning-our-first-sound-audio-playback" title="Permanent link">&para;</a></h3>
+<p>Before we dive in the technical stuff, let's take a listen to some of our samples.</p>
+<p>PS: Make sure to select a .wav file, i've tried several .aif files and wasn't able to get this to playback in this section (don't worry, they still work fine for our AI training).</p>
+<p>Enter the following in our notebook:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span> <span class="nn">IPython.display</span> <span class="k">as</span> <span class="nn">ipd</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">ipd</span><span class="o">.</span><span class="n">Audio</span><span class="p">(</span><span class="s1">&#39;path-to-sample&#39;</span><span class="p">)</span> 
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Where path-to-sample is to a audio file in our dataset for example:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># ipd.Audio(&#39;dataset/drums/kicks/KSHMR Big Kick 01 (D).wav&#39;)</span>
+</span></code></pre></div>
+<p>If u run the above cell, you can playback the chosen sample.</p>
+<h3 id="the-heartbeat-of-our-samples-visualizing-waveforms">The heartbeat of our samples: Visualizing Waveforms 📈🌊<a class="headerlink" href="#the-heartbeat-of-our-samples-visualizing-waveforms" title="Permanent link">&para;</a></h3>
+<p>Visualizing the waveform of some of our samples from all the categories can give us some insights into how their amplitude patterns change over time.</p>
+<p>Create a new cell and enter the following:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span> <span class="nn">librosa.display</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;path-to-sample&#39;</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">waveshow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Waveform&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="understanding-our-durations">Understanding our durations ⏳📊<a class="headerlink" href="#understanding-our-durations" title="Permanent link">&para;</a></h3>
+<p>Let's take a look at the distribution of the duration of the samples in our dataset. This way we can see if we have any outliers and it will help us set a standard length for our model.</p>
+<p>Let's first create a helper function, which scans our dataset and returns the filepath for each of our samples.</p>
+<p>Create a new cell that will hold our function and enter:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span> <span class="nn">os</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">def</span> <span class="nf">get_sample_paths</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursively gather all audio sample paths within our dataset directory.&quot;&quot;&quot;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">sample_paths</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="k">for</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.wav&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.aif&#39;</span><span class="p">):</span> <span class="c1"># Assuming WAV/AIF format, but you can modify or extend as required</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>                <span class="n">sample_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="k">return</span> <span class="n">sample_paths</span>
+</span></code></pre></div>
+<p>Now let's use this function gather our samples and then we can look at the duration of each sample.</p>
+<p>Create a new cell with the following code:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">import</span> <span class="nn">librosa</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">sample_paths</span> <span class="o">=</span> <span class="n">get_sample_paths</span><span class="p">(</span><span class="s1">&#39;dataset&#39;</span><span class="p">)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1"># Get the durations for our dataset</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">librosa</span><span class="o">.</span><span class="n">get_duration</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">sample_paths</span><span class="p">]</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">durations_ms</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">1000</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">durations</span><span class="p">]</span> <span class="c1"># Convert our duration into milliseconds, for easier analyzation</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># Visualizing the distrubtion of our durations</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">durations_ms</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Duration Distribution&#39;</span><span class="p">)</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Milliseconds&#39;</span><span class="p">)</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Samples&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>When we run the above cell, we get the following distribution for our dataset:
+<img alt="Duration Distribution" src="/assets/images/finding-and-acquiring-data/duration_distribution.png" /></p>
+<p>We can now see that the majority of our samples are around the 1000 ms durations.</p>
+<h3 id="dissecting-the-frequency-domain-spectogram-analysis">Dissecting the Frequency Domain: Spectogram Analysis 🌌📊<a class="headerlink" href="#dissecting-the-frequency-domain-spectogram-analysis" title="Permanent link">&para;</a></h3>
+<p>The spectogram is a beautiful representation of audio in a visual way. It shows the frequencies of a audio file as they vary with time. This in my opinion is one of the most important visualizations to understand how a sound behaves.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Picking the first magical audio scroll from our collection</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">first_sample</span> <span class="o">=</span> <span class="n">sample_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Unrolling the scroll to hear its sounds and mysteries</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># &#39;y&#39; is the melody we hear</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># &#39;sr&#39; is how fast the scroll sings its song</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">first_sample</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="c1"># Making our canvas big enough to paint the magic on</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="c1"># Turning the scroll&#39;s song into a beautiful picture</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="c1"># We use a spell to capture the song&#39;s energy</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="c1"># Then, we color it using the power of decibels</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="n">D</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">amplitude_to_db</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">stft</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="c1"># Painting the song on our canvas</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="c1"># Adding a magical color guide to our painting</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%+2.0f</span><span class="s1"> dB&#39;</span><span class="p">)</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="c1"># Giving our masterpiece a name</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The Magic of </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">first_sample</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="c1"># Revealing our magical art to the world</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p>When we run this, we get the following spectogram:
+<img alt="Sample Spectogram" src="/assets/images/finding-and-acquiring-data/124_Dance_Clap_01-Spectogram.png" /></p>
+<h3 id="our-audio-type-distribution-class-sample-counts">Our Audio Type Distribution: Class Sample Counts 🎲📋<a class="headerlink" href="#our-audio-type-distribution-class-sample-counts" title="Permanent link">&para;</a></h3>
+<p>It's important to know the number of samples for each audio type. This so we can make sure that our samples are evenly spread across all types.</p>
+<p>Run the following in a new cell:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">os</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># Setting the path to the main dataset folder</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">dataset_path</span> <span class="o">=</span> <span class="s2">&quot;dataset/drums&quot;</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Using a spell to gather all the magical categories from the kingdom of &#39;dataset&#39;</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">d</span><span class="p">))]</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">sample_counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">category</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">category</span><span class="p">)))</span> <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">}</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">sample_counts</span>
+</span></code></pre></div>
+<p>Our sample counts look like this (as you can see it's not properly balanced, we still have some work to do to make our dataset better (always be improving!)):</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="err">&#39;claps&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">425</span><span class="p">,</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="err">&#39;click&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="err">&#39;cymbals&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">168</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="err">&#39;ha</span><span class="kc">ts</span><span class="err">_closed&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">104</span><span class="p">,</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">  </span><span class="err">&#39;ha</span><span class="kc">ts</span><span class="err">_ope</span><span class="kc">n</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">161</span><span class="p">,</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="err">&#39;kicks&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">322</span><span class="p">,</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span><span class="err">&#39;percussio</span><span class="kc">n</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span><span class="err">&#39;rides&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">140</span><span class="p">,</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">  </span><span class="err">&#39;rimsho</span><span class="kc">t</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">  </span><span class="err">&#39;shakers&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">  </span><span class="err">&#39;s</span><span class="kc">na</span><span class="err">ps&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">  </span><span class="err">&#39;s</span><span class="kc">nares</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">463</span><span class="p">,</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">  </span><span class="err">&#39;</span><span class="kc">ta</span><span class="err">mbouri</span><span class="kc">nes</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">  </span><span class="err">&#39;</span><span class="kc">t</span><span class="err">oms&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">81</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>We have done some great analyzing! We have a deeper understanding of our data, but we also made some scripts, which can also be used in the rest of our journey!</p>
+<p>Remember, the key in mastering deep learning lies in understanding the data you work with! 🧙‍♂️📜🎶</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>With our machine properly setup and our data ready, we can now finally begin with model training (YAY! 🥳)</p>
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+        
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../12/setting-up-your-machine-for-deep-learning/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Setting Up Your Machine For Deep Learning" rel="prev">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Setting Up Your Machine For Deep Learning
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../22/preparing-the-data-opening-our-toy-box/" class="md-footer__link md-footer__link--next" aria-label="Next: Preparing the Data: Opening our Toy Box 🎁👀" rel="next">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Preparing the Data: Opening our Toy Box 🎁👀
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 <a href="https://github.com/raynoldvanheyningen"  target="_blank" rel="noopener">Raynold van Heyningen</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/raynoldvanheyningen" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/raynoldvanheyningen/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.4e31edb1.min.js"></script>
+      
+    
+  </body>
+</html>
